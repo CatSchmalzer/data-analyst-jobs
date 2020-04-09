@@ -48,7 +48,8 @@ BETWEEN 500 AND 1000;*/
 FROM data_analyst_jobs
 GROUP BY state
 ORDER BY avg_rating DESC;*/
---ANSWER: NE has the highest average rating at 4.09
+--ANSWER: NE has the highest average rating at 4.199
+--Could add WHERE star_rating IS NOT null, also round(avg(star_rating),2) as avg_rating will round to two decimal places
 
 --QUESTION 7
 --How many unique job titles in data_analyst_jobs?
@@ -64,19 +65,20 @@ WHERE location = 'CA';*/
 --ANSWER: 230 unique job titles in California
 
 --QUESTION 9
---Name of each comany and star rating with more than 5000 reviews.
+--Name of each comany and star rating with more than 5000 reviews across all locations.
 /*SELECT company, AVG(star_rating) AS avg_rating
 FROM data_analyst_jobs
-WHERE review_count > 5000
+WHERE review_count > 5000 and company IS NOT null
 GROUP BY company
 ORDER BY company;*/
---ANSWER: 41 Companies with one null value--missing company name?
+--ANSWER: 41 Companies including one null value--missing company name?
+--Could add count (location) and order by count(location) desc to see locations
 
 --QUESTION 10
 --Sort from highest to lowest average star rating. Which company is highest?
 /*SELECT company, AVG(star_rating) AS avg_rating
 FROM data_analyst_jobs
-WHERE review_count > 5000
+WHERE review_count > 5000 and avg_rating IS NOT null
 GROUP BY company
 ORDER BY avg_rating DESC;*/
 --ANSWER: 6 Companies are tied with 4.199 average star rating.
